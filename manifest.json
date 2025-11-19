@@ -1,0 +1,37 @@
+{
+  "name": "WasaAfrica - Actualités Afrique",
+  "short_name": "WasaAfrica",
+  "description": "Votre source d'actualités et d'informations sur l'Afrique",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0088CB",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["news", "magazines"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Actualités",
+      "short_name": "News",
+      "description": "Voir les dernières actualités",
+      "url": "/blog.html",
+      "icons": [{ "src": "assets/images/icon-192.png", "sizes": "96x96" }]
+    }
+  ]
+}
+

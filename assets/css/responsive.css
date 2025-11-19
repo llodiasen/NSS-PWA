@@ -1,0 +1,179 @@
+/* ===================================
+   WasaAfrica - Responsive Styles
+   =================================== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero-grid {
+        gap: 20px;
+    }
+    
+    .article-title {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 8px 0;
+        font-size: 12px;
+    }
+    
+    .ticker-news {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .ticker-label {
+        padding: 3px 10px;
+        font-size: 11px;
+    }
+    
+    .social-links {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+    
+    .main-header {
+        padding: 10px 0;
+    }
+    
+    .logo-text {
+        font-size: 1.2rem;
+    }
+    
+    .hero-section {
+        padding: 20px 0;
+    }
+    
+    .article-image {
+        height: 250px;
+    }
+    
+    .article-content {
+        padding: 20px;
+    }
+    
+    .article-title {
+        font-size: 1.5rem;
+    }
+    
+    .article-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 12px;
+    }
+    
+    .side-article .article-image {
+        height: 150px;
+    }
+    
+    .news-section {
+        padding: 40px 0;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .newsletter-section {
+        padding: 40px 0;
+    }
+    
+    .newsletter-content {
+        gap: 20px;
+    }
+    
+    .newsletter-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+    .ticker-content {
+        height: 20px;
+    }
+    
+    .logo-img {
+        height: 30px;
+    }
+    
+    .article-image {
+        height: 200px;
+    }
+    
+    .article-title {
+        font-size: 1.3rem;
+    }
+    
+    .card-image {
+        height: 150px;
+    }
+    
+    .card-content {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .newsletter-text h2 {
+        font-size: 1.3rem;
+    }
+    
+    .scroll-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 20px;
+    }
+    
+    .install-button {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 20px;
+        font-size: 12px;
+    }
+}
+
