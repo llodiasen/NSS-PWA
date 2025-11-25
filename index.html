@@ -72,12 +72,16 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <!-- jQuery depuis CDN (chargé en premier de manière synchrone) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-// Vérifier que jQuery est chargé avant de continuer
-if (typeof jQuery === 'undefined') {
-  console.error('jQuery n\'a pas pu être chargé depuis le CDN');
-} else {
-  console.log('jQuery chargé avec succès:', jQuery.fn.jquery);
-}
+// Attendre que jQuery soit chargé
+(function waitForJQuery() {
+  if (typeof jQuery !== 'undefined') {
+    console.log('jQuery chargé avec succès:', jQuery.fn.jquery);
+    // Définir une variable globale pour indiquer que jQuery est prêt
+    window.jQueryReady = true;
+  } else {
+    setTimeout(waitForJQuery, 50);
+  }
+})();
 </script>
 <script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min4ebd.js?ver=2.7.0-wc.9.0.2" id="jquery-blockui-js" defer="defer" data-wp-strategy="defer" onerror="this.remove()"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
@@ -883,12 +887,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;1&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;1&quot;,&quot;col_md&quot;:&quot;1&quot;,&quot;col_sm&quot;:&quot;1&quot;,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            (function() {
-                if (typeof jQuery === 'undefined') {
-                    console.error('jQuery n\'est pas disponible');
-                    return;
-                }
-                jQuery(document).ready(function(){
+            jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1335,12 +1334,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:3,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;true&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:3,&quot;col_md&quot;:3,&quot;col_sm&quot;:2,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            (function() {
-                if (typeof jQuery === 'undefined') {
-                    console.error('jQuery n\'est pas disponible');
-                    return;
-                }
-                jQuery(document).ready(function(){
+            jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1657,12 +1651,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;4&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;true&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;4&quot;,&quot;col_md&quot;:3,&quot;col_sm&quot;:2,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            (function() {
-                if (typeof jQuery === 'undefined') {
-                    console.error('jQuery n\'est pas disponible');
-                    return;
-                }
-                jQuery(document).ready(function(){
+            jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1861,12 +1850,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;1&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;true&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;1&quot;,&quot;col_md&quot;:&quot;1&quot;,&quot;col_sm&quot;:&quot;1&quot;,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            (function() {
-                if (typeof jQuery === 'undefined') {
-                    console.error('jQuery n\'est pas disponible');
-                    return;
-                }
-                jQuery(document).ready(function(){
+            jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -4067,12 +4051,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;4&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;true&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;4&quot;,&quot;col_md&quot;:&quot;3&quot;,&quot;col_sm&quot;:&quot;2&quot;,&quot;col_xs&quot;:&quot;1&quot;}"></div>
             </div> 
             <script type="text/javascript"> 
-            (function() {
-                if (typeof jQuery === 'undefined') {
-                    console.error('jQuery n\'est pas disponible');
-                    return;
-                }
-                jQuery(document).ready(function(){
+            jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
