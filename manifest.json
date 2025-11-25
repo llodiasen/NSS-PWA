@@ -23,13 +23,12 @@
     }
   ],
   "categories": ["news", "magazines"],
-  "screenshots": [],
   "shortcuts": [
     {
       "name": "Actualités",
       "short_name": "News",
       "description": "Voir les dernières actualités",
-      "url": "./index.html",
+      "url": "./",
       "icons": [{ "src": "assets/images/icon-192.png", "sizes": "96x96" }]
     }
   ]

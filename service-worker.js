@@ -2,17 +2,6 @@ const CACHE_NAME = 'wasafrica-v1';
 const urlsToCache = [
   './',
   './index.html',
-  './assets/css/default380f.css',
-  './assets/css/plugins380f.css',
-  './assets/css/remixicon380f.css',
-  './assets/css/responsive380f.css',
-  './assets/css/style.css',
-  './assets/js/plugins4a7d.js',
-  './assets/js/classie5139.js',
-  './assets/js/mobilemenu5139.js',
-  './assets/js/main5139.js',
-  './assets/images/icon-192.png',
-  './assets/images/icon-512.png',
   './manifest.json'
 ];
 
@@ -50,16 +39,17 @@ self.addEventListener('activate', (event) => {
 
 // Interception des requêtes
 self.addEventListener('fetch', (event) => {
+  // Ignorer les requêtes chrome-extension et autres schémas non-HTTP
+  if (!event.request.url.startsWith('http')) {
+    return fetch(event.request);
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Retourner la réponse du cache ou faire une requête réseau
         if (response) {
           return response;
-        }
-        // Ignorer les requêtes chrome-extension et autres schémas non-HTTP
-        if (!event.request.url.startsWith('http')) {
-          return fetch(event.request);
         }
         return fetch(event.request).then((response) => {
           // Vérifier si la réponse est valide
@@ -76,7 +66,7 @@ self.addEventListener('fetch', (event) => {
         });
       })
       .catch(() => {
-        // En cas d'erreur, retourner une page hors ligne si disponible
+        // En cas d'erreur, retourner la page hors ligne si disponible
         if (event.request.destination === 'document') {
           return caches.match('./index.html');
         }
