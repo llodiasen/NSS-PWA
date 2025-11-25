@@ -2,12 +2,12 @@
   "name": "WasaAfrica - Actualités Afrique",
   "short_name": "WasaAfrica",
   "description": "Votre source d'actualités et d'informations sur l'Afrique",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0088CB",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "./",
   "icons": [
     {
       "src": "assets/images/icon-192.png",
@@ -29,7 +29,7 @@
       "name": "Actualités",
       "short_name": "News",
       "description": "Voir les dernières actualités",
-      "url": "/blog.html",
+      "url": "./index.html",
       "icons": [{ "src": "assets/images/icon-192.png", "sizes": "96x96" }]
     }
   ]

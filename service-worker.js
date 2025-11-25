@@ -1,17 +1,19 @@
 const CACHE_NAME = 'wasafrica-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/assets/css/default380f.css',
-  '/assets/css/plugins380f.css',
-  '/assets/css/remixicon380f.css',
-  '/assets/css/responsive380f.css',
-  '/assets/css/style.css',
-  '/assets/js/plugins4a7d.html',
-  '/assets/js/classie5139.html',
-  '/assets/js/mobilemenu5139.html',
-  '/assets/js/main5139.html',
-  '/manifest.json'
+  './',
+  './index.html',
+  './assets/css/default380f.css',
+  './assets/css/plugins380f.css',
+  './assets/css/remixicon380f.css',
+  './assets/css/responsive380f.css',
+  './assets/css/style.css',
+  './assets/js/plugins4a7d.html',
+  './assets/js/classie5139.html',
+  './assets/js/mobilemenu5139.html',
+  './assets/js/main5139.html',
+  './assets/images/icon-192.png',
+  './assets/images/icon-512.png',
+  './manifest.json'
 ];
 
 // Installation du service worker
@@ -72,7 +74,7 @@ self.addEventListener('fetch', (event) => {
       .catch(() => {
         // En cas d'erreur, retourner une page hors ligne si disponible
         if (event.request.destination === 'document') {
-          return caches.match('/index.html');
+          return caches.match('./index.html');
         }
       })
   );
