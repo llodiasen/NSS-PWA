@@ -69,11 +69,17 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <!-- Font Awesome depuis CDN -->
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLjgyihI+Cc9paqTkMuRx2JQ==' crossorigin='anonymous' referrerpolicy='no-referrer' />
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<!-- jQuery depuis CDN (fallback) -->
+<!-- jQuery depuis CDN (chargé en premier de manière synchrone) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery.minf43b.js?ver=3.7.1" id="jquery-core-js" onerror="console.log('jQuery depuis backtheme.com non disponible, utilisation du CDN')"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1" id="jquery-migrate-js" onerror="console.log('jQuery migrate depuis backtheme.com non disponible')"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min4ebd.js?ver=2.7.0-wc.9.0.2" id="jquery-blockui-js" defer="defer" data-wp-strategy="defer" onerror="this.remove()" onerror="this.remove()"></script>
+<script>
+// Vérifier que jQuery est chargé avant de continuer
+if (typeof jQuery === 'undefined') {
+  console.error('jQuery n\'a pas pu être chargé depuis le CDN');
+} else {
+  console.log('jQuery chargé avec succès:', jQuery.fn.jquery);
+}
+</script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min4ebd.js?ver=2.7.0-wc.9.0.2" id="jquery-blockui-js" defer="defer" data-wp-strategy="defer" onerror="this.remove()"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
 /* <![CDATA[ */
 var wc_add_to_cart_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/neoton\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/backtheme.com\/neoton\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
@@ -877,7 +883,12 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;1&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;1&quot;,&quot;col_md&quot;:&quot;1&quot;,&quot;col_sm&quot;:&quot;1&quot;,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            jQuery(document).ready(function(){
+            (function() {
+                if (typeof jQuery === 'undefined') {
+                    console.error('jQuery n\'est pas disponible');
+                    return;
+                }
+                jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1324,7 +1335,12 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:3,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;true&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:3,&quot;col_md&quot;:3,&quot;col_sm&quot;:2,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            jQuery(document).ready(function(){
+            (function() {
+                if (typeof jQuery === 'undefined') {
+                    console.error('jQuery n\'est pas disponible');
+                    return;
+                }
+                jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1641,7 +1657,12 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;4&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;false&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;true&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;4&quot;,&quot;col_md&quot;:3,&quot;col_sm&quot;:2,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            jQuery(document).ready(function(){
+            (function() {
+                if (typeof jQuery === 'undefined') {
+                    console.error('jQuery n\'est pas disponible');
+                    return;
+                }
+                jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -1840,7 +1861,12 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;1&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;true&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;1&quot;,&quot;col_md&quot;:&quot;1&quot;,&quot;col_sm&quot;:&quot;1&quot;,&quot;col_xs&quot;:1}"></div>
             </div> 
             <script type="text/javascript"> 
-            jQuery(document).ready(function(){
+            (function() {
+                if (typeof jQuery === 'undefined') {
+                    console.error('jQuery n\'est pas disponible');
+                    return;
+                }
+                jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
@@ -4041,7 +4067,12 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
                 <div class="back-slider-conf wpsisac-hide" data-conf="{&quot;slidesToShow&quot;:&quot;4&quot;,&quot;autoplaySpeed&quot;:3000,&quot;interval&quot;:3000,&quot;slidesToScroll&quot;:&quot;1&quot;,&quot;slider_autoplay&quot;:&quot;true&quot;,&quot;pauseOnHover&quot;:&quot;false&quot;,&quot;sliderDots&quot;:&quot;false&quot;,&quot;sliderNav&quot;:&quot;false&quot;,&quot;centerMode&quot;:&quot;false&quot;,&quot;col_lg&quot;:&quot;4&quot;,&quot;col_md&quot;:&quot;3&quot;,&quot;col_sm&quot;:&quot;2&quot;,&quot;col_xs&quot;:&quot;1&quot;}"></div>
             </div> 
             <script type="text/javascript"> 
-            jQuery(document).ready(function(){
+            (function() {
+                if (typeof jQuery === 'undefined') {
+                    console.error('jQuery n\'est pas disponible');
+                    return;
+                }
+                jQuery(document).ready(function(){
                 jQuery( '.back-addon-slider' ).each(function( index ) {        
                     var slider_id       = jQuery(this).attr('id'); 
                     var slider_conf     = jQuery.parseJSON( jQuery(this).closest('.back-unique-slider').find('.back-slider-conf').attr('data-conf'));               
