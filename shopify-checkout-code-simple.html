@@ -1,0 +1,56 @@
+<!-- ===================================
+     Code à copier-coller directement dans Shopify
+     ===================================
+     
+     Fichier : checkout.liquid
+     Emplacement : Juste avant </head> ou </body>
+     =================================== -->
+
+<style id="hide-express-payment">
+section[aria-label="Paiement express"],
+section[aria-label="Paiement express"] *,
+div[data-count="2"].OTERX,
+div.OTERX[data-count="2"],
+#express-checkout-wallets-wrapper,
+#shop-pay-button,
+iframe#PAYPAL_EXPRESS-iframe {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+}
+</style>
+
+<script>
+(function() {
+    function hideExpressPayment() {
+        var sections = document.querySelectorAll('section[aria-label="Paiement express"]');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+            var children = sections[i].querySelectorAll('*');
+            for (var j = 0; j < children.length; j++) {
+                children[j].style.cssText = 'display: none !important; visibility: hidden !important;';
+            }
+        }
+        var oterx = document.querySelectorAll('div[data-count="2"].OTERX');
+        for (var i = 0; i < oterx.length; i++) {
+            oterx[i].style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important;';
+        }
+        var wrapper = document.getElementById('express-checkout-wallets-wrapper');
+        if (wrapper) wrapper.style.cssText = 'display: none !important; visibility: hidden !important;';
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', hideExpressPayment);
+    } else {
+        hideExpressPayment();
+    }
+    
+    setTimeout(hideExpressPayment, 500);
+    setTimeout(hideExpressPayment, 1500);
+})();
+</script>
+

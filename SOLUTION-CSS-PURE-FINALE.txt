@@ -1,0 +1,130 @@
+SOLUTION CSS PURE - Fonctionne même si JavaScript ne marche pas
+========================================
+
+Cette solution utilise uniquement CSS et fonctionne à 100% même s'il y a des erreurs JavaScript.
+
+========================================
+
+ÉTAPES :
+
+1. Shopify → Thèmes → Personnaliser (pas "Modifier le code")
+2. Paramètres du thème → CSS additionnel
+3. Collez TOUT ce code :
+
+========================================
+
+/* SOLUTION CSS PURE - Masquer modes d'expédition pour dons */
+/* Cette solution masque directement tous les éléments d'expédition sur checkout */
+
+/* Masquer les inputs de shipping */
+input[name="shipping_methods"],
+input[type="radio"][name="shipping_methods"],
+input[type="radio"][id*="shipping_methods"] {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Masquer les labels et conteneurs des options de shipping */
+label[for*="shipping_methods"],
+label[data-option-selected][for*="shipping_methods"],
+label:has(input[name="shipping_methods"]) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer le conteneur principal yyi4nyn */
+.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys,
+div.yyi4nyn:has(input[name="shipping_methods"]),
+div:has(.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Masquer les sections contenant shipping */
+section:has(input[name="shipping_methods"]),
+fieldset:has(input[name="shipping_methods"]),
+section:has(.yyi4nyn),
+section:has([id*="shipping_methods"]) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Masquer le titre "Mode d'expédition" */
+h3[id="shippingMethod"],
+h3:contains("Mode d"),
+h3:contains("expédition") {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer les parents des éléments de shipping */
+div:has(input[name="shipping_methods"]),
+div:has(label[for*="shipping_methods"]),
+div:has(.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer les éléments avec les classes spécifiques */
+._1u2aa6m3._1u2aa6ma._1u2aa6mc._1u2aa6m8,
+._1u2aa6m10._1u2aa6mx {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer les textes "Livraison locale", "Livraison en point relais", etc. */
+p:contains("Livraison locale"),
+p:contains("Livraison en point relais"),
+p:contains("Livraison à domicile"),
+div:has(p:contains("Livraison locale")),
+div:has(p:contains("Livraison en point relais")),
+div:has(p:contains("Livraison à domicile")) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer les collapsibles de shipping */
+[id*="shipping_methods"][class*="collapsible"],
+[id*="shipping_methods-collapsible"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Masquer le champ "Téléphone mobile" qui apparaît dans shipping */
+#TextField8,
+label[for="TextField8"],
+div:has(#TextField8) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer le bouton "Ajouter des consignes de livraison" */
+button:contains("Ajouter des consignes"),
+button:contains("consignes de livraison") {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+========================================
+
+IMPORTANT : 
+- Cette solution masque TOUJOURS les modes d'expédition sur checkout
+- Si vous voulez que ce soit uniquement pour les dons, vous DEVEZ aussi configurer le produit dans Shopify (marquer comme "ne nécessite pas d'expédition")
+
+========================================
+

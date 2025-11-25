@@ -1,0 +1,204 @@
+SOLUTION PRÉCISE - Masque uniquement "Mode d'expédition" et les options de livraison
+========================================
+
+Cette solution masque UNIQUEMENT :
+- Le titre "Mode d'expédition" / "Choisissez un mode d'expédition"
+- Les options de livraison (Livraison locale, Livraison en point relais, Livraison à domicile)
+- Le prix de chaque option
+
+SANS masquer :
+- Les champs de contact (téléphone, email)
+- Les champs de pays/région
+- Les autres sections du checkout
+
+========================================
+
+JAVASCRIPT (à mettre dans theme.liquid, avant </head>) :
+
+<script>
+// Masquer UNIQUEMENT la section "Mode d'expédition" et les options de livraison
+(function() {
+    'use strict';
+    
+    function hideOnlyShippingMethods() {
+        // Vérifier qu'on est sur checkout
+        if (!document.location.href.includes('/checkout')) return;
+        
+        // Méthode 1 : Trouver le titre "Mode d'expédition" et masquer toute sa section
+        var shippingHeading = document.getElementById('shippingMethod');
+        if (shippingHeading) {
+            // Remonter jusqu'à trouver la section complète qui contient les options
+            var section = shippingHeading.closest('section, fieldset');
+            
+            // Si on ne trouve pas de section directe, chercher le parent qui contient les options
+            if (!section || !section.querySelector('input[name="shipping_methods"]')) {
+                section = null;
+                var element = shippingHeading;
+                
+                // Remonter jusqu'à trouver une section qui contient les inputs shipping
+                for (var i = 0; i < 10; i++) {
+                    element = element.parentElement;
+                    if (!element || element === document.body) break;
+                    
+                    if (element.tagName === 'SECTION' || 
+                        element.tagName === 'FIELDSET' ||
+                        (element.querySelector && element.querySelector('input[name="shipping_methods"]'))) {
+                        section = element;
+                        break;
+                    }
+                }
+            }
+            
+            if (section && section.querySelector('input[name="shipping_methods"]')) {
+                // Masquer UNIQUEMENT cette section
+                section.style.display = 'none';
+                section.style.visibility = 'hidden';
+                section.style.height = '0';
+                section.style.overflow = 'hidden';
+                section.style.margin = '0';
+                section.style.padding = '0';
+            }
+        }
+        
+        // Méthode 2 : Trouver le fieldset qui contient les options de shipping
+        var shippingFieldset = document.querySelector('fieldset#shipping_methods');
+        if (shippingFieldset) {
+            // Masquer le fieldset et son contenu
+            shippingFieldset.style.display = 'none';
+            shippingFieldset.style.visibility = 'hidden';
+            shippingFieldset.style.height = '0';
+            shippingFieldset.style.overflow = 'hidden';
+        }
+        
+        // Méthode 3 : Masquer uniquement les inputs et leurs parents directs (pas les grands-parents)
+        var shippingInputs = document.querySelectorAll('input[name="shipping_methods"]');
+        shippingInputs.forEach(function(input) {
+            // Masquer l'input
+            input.style.display = 'none';
+            input.style.visibility = 'hidden';
+            
+            // Masquer le label associé
+            var label = document.querySelector('label[for="' + input.id + '"]');
+            if (label) {
+                // Remonter jusqu'à trouver le conteneur de l'option complète
+                var optionContainer = label.closest('div._1u2aa6m3, div._1u2aa6m10, div.yyi4nyn');
+                if (optionContainer) {
+                    optionContainer.style.display = 'none';
+                    optionContainer.style.visibility = 'hidden';
+                    
+                    // Masquer aussi les divs qui contiennent les détails (Gratuit, 3,99 €, etc.)
+                    var details = optionContainer.querySelectorAll('div._1u2aa6me, div._1u2aa6mm');
+                    details.forEach(function(detail) {
+                        detail.style.display = 'none';
+                        detail.style.visibility = 'hidden';
+                    });
+                }
+            }
+        });
+        
+        // Méthode 4 : Masquer le conteneur .yyi4nyn qui contient toutes les options
+        var optionsContainer = document.querySelector('.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys');
+        if (optionsContainer) {
+            // Vérifier que c'est bien le conteneur des options de livraison (contient des inputs shipping)
+            if (optionsContainer.querySelector('input[name="shipping_methods"]')) {
+                optionsContainer.style.display = 'none';
+                optionsContainer.style.visibility = 'hidden';
+                optionsContainer.style.height = '0';
+                optionsContainer.style.overflow = 'hidden';
+            }
+        }
+        
+        // Méthode 5 : Masquer uniquement les sections qui contiennent "Livraison locale", "Livraison en point relais", etc.
+        var allSections = document.querySelectorAll('section, fieldset, div[class*="section"]');
+        allSections.forEach(function(section) {
+            var text = section.textContent || '';
+            
+            // Vérifier si cette section contient les textes de livraison MAIS PAS les champs de contact
+            var hasShippingText = (text.includes('Livraison locale') ||
+                                  text.includes('Livraison en point relais') ||
+                                  text.includes('Livraison à domicile') ||
+                                  text.includes('Remise en main propre') ||
+                                  (text.includes('Mode d') && text.includes('expédition')));
+            
+            var hasShippingInputs = section.querySelector('input[name="shipping_methods"]');
+            
+            // Vérifier qu'elle NE contient PAS les champs de contact (téléphone, email, etc.)
+            var hasContactFields = section.querySelector('input[type="tel"]') ||
+                                  section.querySelector('input[type="email"]') ||
+                                  section.querySelector('select[name="countryCode"]') ||
+                                  section.querySelector('label[for*="phone"]') ||
+                                  section.querySelector('label[for*="email"]');
+            
+            // Masquer UNIQUEMENT si elle contient les options de livraison ET pas les champs de contact
+            if (hasShippingText && hasShippingInputs && !hasContactFields) {
+                section.style.display = 'none';
+                section.style.visibility = 'hidden';
+                section.style.height = '0';
+                section.style.overflow = 'hidden';
+            }
+        });
+    }
+    
+    // Exécuter plusieurs fois avec des délais
+    function runHide() {
+        hideOnlyShippingMethods();
+    }
+    
+    // Exécuter immédiatement
+    runHide();
+    
+    // Exécuter après des délais
+    setTimeout(runHide, 300);
+    setTimeout(runHide, 600);
+    setTimeout(runHide, 1000);
+    setTimeout(runHide, 2000);
+    setTimeout(runHide, 3000);
+    
+    // Observer les changements DOM
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runHide);
+    }
+    
+    if (typeof MutationObserver !== 'undefined') {
+        var observer = new MutationObserver(function() {
+            runHide();
+        });
+        
+        if (document.body) {
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+    }
+})();
+</script>
+
+========================================
+
+CSS (optionnel, à ajouter dans CSS additionnel si le JS seul ne suffit pas) :
+
+/* Masquer UNIQUEMENT les options de livraison, pas les autres sections */
+h3[id="shippingMethod"],
+fieldset#shipping_methods,
+fieldset#shipping_methods ~ *,
+.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys:has(input[name="shipping_methods"]),
+section:has(input[name="shipping_methods"]):not(:has(input[type="tel"])):not(:has(input[type="email"])) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* IMPORTANT : NE PAS masquer les sections avec des champs de contact */
+section:has(input[type="tel"]),
+section:has(input[type="email"]),
+section:has(select[name="countryCode"]),
+section:has(label[for*="phone"]),
+section:has(label[for*="email"]) {
+    display: block !important;
+    visibility: visible !important;
+}
+
+========================================
+

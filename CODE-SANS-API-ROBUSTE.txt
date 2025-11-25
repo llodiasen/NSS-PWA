@@ -1,0 +1,174 @@
+COPIER CE CODE EXACTEMENT CI-DESSOUS :
+========================================
+
+<script>
+// Version SANS API cart.js - Masque directement la section expédition pour les dons
+(function() {
+    'use strict';
+    
+    function hideShippingSection() {
+        if (!window.location.href.includes('/checkout')) return;
+        
+        // Méthode 1 : Masquer directement le div avec la classe spécifique
+        var shippingDiv = null;
+        
+        // Chercher le div qui contient h3#shippingMethod
+        var heading = document.getElementById('shippingMethod');
+        if (heading) {
+            // Remonter jusqu'à trouver le div avec les classes spécifiques
+            var element = heading.parentElement;
+            for (var i = 0; i < 15; i++) {
+                if (!element || element === document.body) break;
+                
+                // Vérifier si cet élément a les classes spécifiques
+                if (element.tagName === 'DIV' && 
+                    element.classList && 
+                    element.classList.contains('_1ip0g651') &&
+                    element.classList.contains('_1ip0g650') &&
+                    element.classList.contains('_1fragemn2') &&
+                    element.classList.contains('_1fragem50') &&
+                    element.classList.contains('_1fragem6t') &&
+                    element.classList.contains('_1fragem41')) {
+                    shippingDiv = element;
+                    break;
+                }
+                
+                element = element.parentElement;
+            }
+        }
+        
+        // Si on n'a pas trouvé, chercher directement par les classes
+        if (!shippingDiv) {
+            var allDivs = document.querySelectorAll('div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41');
+            allDivs.forEach(function(div) {
+                if (div.querySelector('h3#shippingMethod') || 
+                    div.querySelector('fieldset#shipping_methods')) {
+                    shippingDiv = div;
+                }
+            });
+        }
+        
+        // Masquer le div trouvé
+        if (shippingDiv) {
+            shippingDiv.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; opacity: 0 !important;';
+        }
+        
+        // Méthode 2 : Masquer aussi via le fieldset
+        var fieldset = document.querySelector('fieldset#shipping_methods');
+        if (fieldset) {
+            var parentDiv = fieldset.closest('div._1ip0g651');
+            if (parentDiv && parentDiv.classList.contains('_1ip0g650') && 
+                parentDiv.classList.contains('_1fragem50')) {
+                parentDiv.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+            }
+        }
+    }
+    
+    // Injecter du CSS IMMÉDIATEMENT (fonctionne même sans JavaScript)
+    function injectCSS() {
+        if (document.getElementById('hide-shipping-donation-css')) return;
+        
+        var style = document.createElement('style');
+        style.id = 'hide-shipping-donation-css';
+        style.textContent = `
+            /* Masquer la section "Mode d'expédition" pour les dons - Classe spécifique */
+            div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod),
+            div._1ip0g651._1ip0g650._1fragem50:has(h3#shippingMethod),
+            div._1ip0g651._1ip0g650._1fragem50:has(fieldset#shipping_methods) {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                overflow: hidden !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            /* Alternative si :has() n'est pas supporté */
+            div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 h3#shippingMethod,
+            div._1ip0g651._1ip0g650._1fragem50 fieldset#shipping_methods {
+                display: none !important;
+            }
+            
+            /* Masquer le parent qui contient shippingMethod */
+            div._1ip0g651._1ip0g650._1fragem50:has(> h3#shippingMethod) {
+                display: none !important;
+            }
+        `;
+        
+        var head = document.head || document.getElementsByTagName('head')[0];
+        if (head) {
+            head.appendChild(style);
+        }
+    }
+    
+    // Injecter le CSS immédiatement
+    injectCSS();
+    
+    // Fonction qui essaie plusieurs fois
+    function tryHide() {
+        hideShippingSection();
+    }
+    
+    // Exécuter plusieurs fois avec des délais
+    tryHide();
+    setTimeout(tryHide, 300);
+    setTimeout(tryHide, 600);
+    setTimeout(tryHide, 1000);
+    setTimeout(tryHide, 2000);
+    setTimeout(tryHide, 3000);
+    setTimeout(tryHide, 5000);
+    setTimeout(tryHide, 7000);
+    
+    // Attendre que le DOM soit chargé
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            injectCSS();
+            tryHide();
+        });
+    } else {
+        injectCSS();
+        tryHide();
+    }
+    
+    // Attendre que la page soit complètement chargée
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            injectCSS();
+            tryHide();
+        }, 500);
+    });
+    
+    // Observer les changements DOM
+    if (typeof MutationObserver !== 'undefined') {
+        function setupObserver() {
+            if (document.body) {
+                var observer = new MutationObserver(function() {
+                    tryHide();
+                });
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            } else {
+                setTimeout(setupObserver, 100);
+            }
+        }
+        setupObserver();
+    }
+    
+    // Essayer aussi toutes les secondes pendant 30 secondes
+    var attempts = 0;
+    var maxAttempts = 30;
+    var interval = setInterval(function() {
+        attempts++;
+        tryHide();
+        if (attempts >= maxAttempts) {
+            clearInterval(interval);
+        }
+    }, 1000);
+})();
+</script>
+
+========================================
+FIN DU CODE À COPIER
+

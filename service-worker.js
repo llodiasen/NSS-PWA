@@ -7,10 +7,10 @@ const urlsToCache = [
   './assets/css/remixicon380f.css',
   './assets/css/responsive380f.css',
   './assets/css/style.css',
-  './assets/js/plugins4a7d.html',
-  './assets/js/classie5139.html',
-  './assets/js/mobilemenu5139.html',
-  './assets/js/main5139.html',
+  './assets/js/plugins4a7d.js',
+  './assets/js/classie5139.js',
+  './assets/js/mobilemenu5139.js',
+  './assets/js/main5139.js',
   './assets/images/icon-192.png',
   './assets/images/icon-512.png',
   './manifest.json'
@@ -56,6 +56,10 @@ self.addEventListener('fetch', (event) => {
         // Retourner la réponse du cache ou faire une requête réseau
         if (response) {
           return response;
+        }
+        // Ignorer les requêtes chrome-extension et autres schémas non-HTTP
+        if (!event.request.url.startsWith('http')) {
+          return fetch(event.request);
         }
         return fetch(event.request).then((response) => {
           // Vérifier si la réponse est valide

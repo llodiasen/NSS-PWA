@@ -1,0 +1,166 @@
+VERSION DEBUG - Pour tester et voir ce qui se passe :
+========================================
+
+Copiez ce code dans theme.liquid (avant </head>) :
+
+<script>
+// Version DEBUG - Affiche des messages pour comprendre le problème
+(function() {
+    console.log('=== DEBUT SCRIPT MASQUER EXPEDITION ===');
+    
+    function debugLog(message) {
+        console.log('[HIDE SHIPPING]', message);
+    }
+    
+    function hideShippingSection() {
+        debugLog('Tentative de masquage...');
+        
+        if (!window.location.href.includes('/checkout')) {
+            debugLog('PAS sur checkout, arrêt');
+            return;
+        }
+        
+        debugLog('On est sur checkout, continue...');
+        
+        // Vérifier le panier
+        fetch('/cart.js')
+            .then(function(response) {
+                debugLog('Réponse cart.js reçue');
+                return response.json();
+            })
+            .then(function(cart) {
+                debugLog('Panier:', cart);
+                
+                var isDon = false;
+                if (cart.items && cart.items.length > 0) {
+                    debugLog('Nombre d\'items:', cart.items.length);
+                    
+                    cart.items.forEach(function(item, index) {
+                        debugLog('Item ' + index + ':', {
+                            variant_id: item.variant_id,
+                            title: item.product_title,
+                            properties: item.properties
+                        });
+                        
+                        if (item.variant_id === 52543227003226) {
+                            debugLog('TROUVÉ : Item avec variant_id 52543227003226');
+                            isDon = true;
+                        }
+                        
+                        if (item.properties) {
+                            Object.keys(item.properties).forEach(function(key) {
+                                if (key === 'Montant du don') {
+                                    debugLog('TROUVÉ : Propriété "Montant du don"');
+                                    isDon = true;
+                                }
+                            });
+                        }
+                    });
+                }
+                
+                debugLog('Est-ce un don?', isDon);
+                
+                if (isDon && cart.items.length === 1) {
+                    debugLog('C\'est un don, on masque...');
+                    
+                    // Chercher les éléments
+                    var shippingInputs = document.querySelectorAll('input[name="shipping_methods"]');
+                    debugLog('Inputs shipping trouvés:', shippingInputs.length);
+                    
+                    if (shippingInputs.length === 0) {
+                        debugLog('ATTENTION : Aucun input shipping trouvé !');
+                    } else {
+                        shippingInputs.forEach(function(input, index) {
+                            debugLog('Input ' + index + ' trouvé:', input);
+                            
+                            // Remonter jusqu'à la section
+                            var element = input;
+                            var section = null;
+                            
+                            for (var i = 0; i < 10; i++) {
+                                element = element.parentElement;
+                                if (!element) break;
+                                
+                                debugLog('Parent ' + i + ':', {
+                                    tag: element.tagName,
+                                    id: element.id,
+                                    classes: element.className
+                                });
+                                
+                                if (element.tagName === 'SECTION' || 
+                                    element.tagName === 'FIELDSET') {
+                                    section = element;
+                                    debugLog('SECTION TROUVÉE:', section);
+                                    break;
+                                }
+                            }
+                            
+                            if (section) {
+                                section.style.display = 'none';
+                                section.style.visibility = 'hidden';
+                                section.style.height = '0';
+                                debugLog('Section masquée avec succès');
+                            } else {
+                                debugLog('ERREUR : Section parente non trouvée');
+                            }
+                        });
+                    }
+                    
+                    // Masquer aussi par le conteneur
+                    var container = document.querySelector('.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys');
+                    if (container) {
+                        debugLog('Conteneur .yyi4nyn trouvé:', container);
+                        var section = container.closest('section, fieldset');
+                        if (section) {
+                            section.style.display = 'none';
+                            debugLog('Conteneur masqué avec succès');
+                        }
+                    } else {
+                        debugLog('Conteneur .yyi4nyn NON trouvé');
+                    }
+                } else {
+                    debugLog('Ce n\'est PAS un don, on ne masque pas');
+                }
+            })
+            .catch(function(error) {
+                debugLog('ERREUR lors de la vérification:', error);
+            });
+    }
+    
+    // Exécuter
+    setTimeout(function() {
+        debugLog('Exécution après 1 seconde');
+        hideShippingSection();
+    }, 1000);
+    
+    setTimeout(function() {
+        debugLog('Exécution après 3 secondes');
+        hideShippingSection();
+    }, 3000);
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            debugLog('DOMContentLoaded');
+            hideShippingSection();
+        });
+    } else {
+        debugLog('DOM déjà chargé');
+        hideShippingSection();
+    }
+    
+    console.log('=== FIN SCRIPT ===');
+})();
+</script>
+
+========================================
+INSTRUCTIONS :
+
+1. Ajoutez ce code dans theme.liquid
+2. Allez sur votre page "Faire un don"
+3. Faites un don et allez au checkout
+4. Ouvrez la console du navigateur (F12 > Console)
+5. Regardez les messages qui commencent par [HIDE SHIPPING]
+6. Envoyez-moi ces messages pour que je puisse voir ce qui ne va pas
+
+========================================
+

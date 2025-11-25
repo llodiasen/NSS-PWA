@@ -1,0 +1,49 @@
+CSS POUR DON ATTA - À ajouter dans CSS additionnel
+========================================
+
+Cette solution CSS masque uniquement la section avec la classe spécifique.
+Pour que ça fonctionne UNIQUEMENT pour les dons, ajoutez ce CSS :
+
+========================================
+
+/* Masquer la section "Mode d'expédition" pour les dons ATTA */
+/* Cible directement la classe spécifique que vous avez identifiée */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod),
+div._1ip0g651._1ip0g650._1fragem50:has(h3#shippingMethod),
+div._1ip0g651._1ip0g650._1fragem50:has(fieldset#shipping_methods) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Alternative si :has() n'est pas supporté */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 h3#shippingMethod {
+    display: none !important;
+}
+
+/* Masquer la section parente qui contient le titre */
+h3#shippingMethod:parent {
+    display: none !important;
+}
+
+/* Masquer aussi via le fieldset */
+div._1ip0g651._1ip0g650._1fragem50 fieldset#shipping_methods {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+========================================
+
+ATTENTION : Cette solution CSS masquera TOUJOURS la section sur checkout.
+Pour que ça fonctionne UNIQUEMENT pour les dons, vous DEVEZ utiliser le JavaScript
+qui vérifie le panier (fichier CODE-SIMPLE-CLASS-SPECIFIQUE.txt).
+
+OU configurez le produit "Don" dans Shopify pour qu'il n'ait pas besoin d'expédition.
+
+========================================
+

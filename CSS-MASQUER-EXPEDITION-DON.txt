@@ -1,0 +1,20 @@
+COPIER CE CODE CSS CI-DESSOUS :
+========================================
+
+/* Masquer les modes d'expédition pour les dons */
+body.donation-checkout-no-shipping fieldset#shipping_methods,
+body.donation-checkout-no-shipping input[name="shipping_methods"],
+body.donation-checkout-no-shipping .yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys,
+body.donation-checkout-no-shipping h3[id="shippingMethod"],
+body.donation-checkout-no-shipping section[aria-labelledby*="shipping"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+========================================
+FIN DU CODE CSS
+

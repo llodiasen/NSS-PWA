@@ -1,0 +1,49 @@
+CSS DIRECT - À ajouter dans CSS additionnel (Shopify)
+========================================
+
+Cette solution CSS masque directement la classe spécifique.
+Ajoutez ce CSS dans : Shopify → Thèmes → Personnaliser → Paramètres du thème → CSS additionnel
+
+========================================
+
+/* Masquer la section "Mode d'expédition" - Classe spécifique identifiée */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41,
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 h3#shippingMethod,
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 fieldset#shipping_methods {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Masquer aussi les parents qui contiennent cette classe */
+div:has(> div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod)),
+section:has(div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod)) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Alternative sans :has() - Masquer directement la classe */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+========================================
+
+ATTENTION : Cette solution CSS masquera TOUJOURS la section sur checkout.
+
+Pour que ça fonctionne UNIQUEMENT pour les dons, utilisez le JavaScript
+du fichier CODE-SANS-API-ROBUSTE.txt qui vérifie le panier.
+
+OU configurez le produit "Don" dans Shopify pour qu'il n'ait pas besoin d'expédition
+(Paramètres → Produits → Don → Décocher "Ce produit nécessite une expédition").
+
+========================================
+

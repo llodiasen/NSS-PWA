@@ -1,0 +1,80 @@
+COPIER CE CODE EXACTEMENT CI-DESSOUS :
+========================================
+
+<script>
+// Masquer UNIQUEMENT pour les dons ATTA - Version simple avec classe spécifique
+(function() {
+    'use strict';
+    
+    function hideShippingForDonation() {
+        if (!window.location.href.includes('/checkout')) return;
+        
+        // Vérifier si c'est un don
+        fetch('/cart.js')
+            .then(function(r) { return r.json(); })
+            .then(function(cart) {
+                var isDon = cart.items && cart.items.some(function(item) {
+                    return item.variant_id === 52543227003226 ||
+                           (item.properties && Object.keys(item.properties).some(function(k) {
+                               return k === 'Montant du don';
+                           }));
+                }) && cart.items.length === 1;
+                
+                if (isDon) {
+                    // Masquer le div avec la classe spécifique qui contient shippingMethod
+                    var div = document.querySelector('div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41');
+                    
+                    if (!div) {
+                        // Chercher via le h3#shippingMethod
+                        var heading = document.getElementById('shippingMethod');
+                        if (heading) {
+                            var element = heading;
+                            for (var i = 0; i < 10; i++) {
+                                element = element.parentElement;
+                                if (!element) break;
+                                
+                                if (element.tagName === 'DIV' && 
+                                    element.classList.contains('_1ip0g651') &&
+                                    element.classList.contains('_1ip0g650') &&
+                                    element.classList.contains('_1fragem50')) {
+                                    div = element;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Masquer le div trouvé
+                    if (div) {
+                        div.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+                    }
+                }
+            })
+            .catch(function(e) {});
+    }
+    
+    hideShippingForDonation();
+    setTimeout(hideShippingForDonation, 500);
+    setTimeout(hideShippingForDonation, 1000);
+    setTimeout(hideShippingForDonation, 2000);
+    setTimeout(hideShippingForDonation, 5000);
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', hideShippingForDonation);
+    }
+    
+    window.addEventListener('load', function() {
+        setTimeout(hideShippingForDonation, 500);
+        setTimeout(hideShippingForDonation, 2000);
+    });
+    
+    if (typeof MutationObserver !== 'undefined' && document.body) {
+        var obs = new MutationObserver(hideShippingForDonation);
+        obs.observe(document.body, { childList: true, subtree: true });
+    }
+})();
+</script>
+
+========================================
+FIN DU CODE À COPIER
+

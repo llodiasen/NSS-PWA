@@ -1,0 +1,222 @@
+COPIER CE CODE EXACTEMENT CI-DESSOUS :
+========================================
+
+<script>
+// Masquer les modes d'expédition pour les dons - Version agressive
+(function() {
+    'use strict';
+    
+    function hideShippingSection() {
+        // Vérifier si on est sur checkout
+        if (!window.location.href.includes('/checkout')) return;
+        
+        // Méthode 1 : Masquer directement par les inputs radio
+        var shippingRadios = document.querySelectorAll('input[name="shipping_methods"]');
+        if (shippingRadios.length > 0) {
+            shippingRadios.forEach(function(radio) {
+                // Remonter jusqu'à la section complète
+                var element = radio;
+                var section = null;
+                
+                // Chercher jusqu'à 10 niveaux de parent
+                for (var i = 0; i < 10; i++) {
+                    element = element.parentElement;
+                    if (!element) break;
+                    
+                    // Chercher une section avec fieldset ou section
+                    if (element.tagName === 'SECTION' || 
+                        element.tagName === 'FIELDSET' ||
+                        element.id && element.id.includes('shipping') ||
+                        element.querySelector('h3[id="shippingMethod"]')) {
+                        section = element;
+                        break;
+                    }
+                }
+                
+                if (section) {
+                    section.style.display = 'none';
+                    section.style.visibility = 'hidden';
+                    section.style.height = '0';
+                    section.style.overflow = 'hidden';
+                    section.style.margin = '0';
+                    section.style.padding = '0';
+                    section.style.opacity = '0';
+                }
+                
+                // Masquer aussi le radio button et ses parents directs
+                var parent = radio.parentElement;
+                while (parent && parent !== document.body) {
+                    if (parent.classList && parent.classList.length > 0) {
+                        parent.style.display = 'none';
+                    }
+                    parent = parent.parentElement;
+                }
+            });
+        }
+        
+        // Méthode 2 : Masquer par le conteneur spécifique yyi4nyn
+        var container = document.querySelector('.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys');
+        if (container) {
+            // Masquer le conteneur et tous ses parents jusqu'à la section
+            var element = container;
+            for (var i = 0; i < 15; i++) {
+                if (!element) break;
+                
+                if (element.tagName === 'SECTION' || 
+                    element.tagName === 'FIELDSET' ||
+                    element.id && (element.id.includes('shipping') || element.id.includes('expédition'))) {
+                    element.style.display = 'none';
+                    element.style.visibility = 'hidden';
+                    element.style.height = '0';
+                    element.style.overflow = 'hidden';
+                    break;
+                }
+                
+                element.style.display = 'none';
+                element.style.visibility = 'hidden';
+                element = element.parentElement;
+            }
+        }
+        
+        // Méthode 3 : Chercher par le texte "Mode d'expédition" ou "Livraison"
+        var allElements = document.querySelectorAll('h2, h3, p, span, div');
+        allElements.forEach(function(el) {
+            var text = el.textContent || '';
+            if ((text.includes('Mode d') && text.includes('expédition')) ||
+                text.includes('Livraison locale') ||
+                text.includes('Livraison en point relais') ||
+                text.includes('Livraison à domicile')) {
+                
+                var section = el;
+                for (var i = 0; i < 8; i++) {
+                    section = section.parentElement;
+                    if (!section) break;
+                    if (section.tagName === 'SECTION' || 
+                        section.tagName === 'FIELDSET' ||
+                        section.id && section.id.includes('shipping')) {
+                        section.style.display = 'none';
+                        section.style.visibility = 'hidden';
+                        section.style.height = '0';
+                        section.style.overflow = 'hidden';
+                        break;
+                    }
+                }
+            }
+        });
+        
+        // Méthode 4 : Masquer par ID shippingMethod
+        var shippingMethodHeading = document.getElementById('shippingMethod');
+        if (shippingMethodHeading) {
+            var section = shippingMethodHeading.closest('section, fieldset, div[data-section-id]');
+            if (section) {
+                section.style.display = 'none';
+                section.style.visibility = 'hidden';
+                section.style.height = '0';
+                section.style.overflow = 'hidden';
+            }
+        }
+        
+        // Méthode 5 : Masquer tous les éléments avec les classes spécifiques de Shopify
+        var shopifyClasses = [
+            '.yyi4nyn', '.yyi4nyk', '.yyi4nyr', '.yyi4nys',
+            '._1u2aa6m3', '._1u2aa6ma', '._1u2aa6mc',
+            'fieldset[id*="shipping"]'
+        ];
+        
+        shopifyClasses.forEach(function(className) {
+            try {
+                var elements = document.querySelectorAll(className);
+                elements.forEach(function(el) {
+                    // Vérifier si cet élément contient des inputs de shipping
+                    if (el.querySelector && el.querySelector('input[name="shipping_methods"]')) {
+                        el.style.display = 'none';
+                        el.style.visibility = 'hidden';
+                        
+                        // Masquer aussi le parent
+                        var parent = el.parentElement;
+                        for (var i = 0; i < 5; i++) {
+                            if (!parent) break;
+                            if (parent.tagName === 'SECTION' || parent.tagName === 'FIELDSET') {
+                                parent.style.display = 'none';
+                                parent.style.visibility = 'hidden';
+                                break;
+                            }
+                            parent = parent.parentElement;
+                        }
+                    }
+                });
+            } catch(e) {}
+        });
+    }
+    
+    function checkAndHide() {
+        // Vérifier si c'est un don
+        fetch('/cart.js')
+            .then(function(response) {
+                if (!response.ok) throw new Error('Erreur fetch');
+                return response.json();
+            })
+            .then(function(cart) {
+                var isDon = false;
+                
+                if (cart.items && cart.items.length > 0) {
+                    isDon = cart.items.some(function(item) {
+                        return item.variant_id === 52543227003226 ||
+                               (item.properties && 
+                                Object.keys(item.properties).some(function(key) {
+                                    return key === 'Montant du don' || 
+                                           (item.properties[key] && 
+                                            item.properties[key].toString().includes('€'));
+                                }));
+                    });
+                    
+                    // Si c'est un don et qu'il n'y a que ce produit
+                    if (isDon && cart.items.length === 1) {
+                        hideShippingSection();
+                        document.body.classList.add('donation-checkout-no-shipping');
+                    }
+                }
+            })
+            .catch(function(error) {
+                console.log('Vérification panier échouée, tentative de masquage direct...');
+                // En cas d'erreur, essayer quand même de masquer
+                // (peut-être que c'est un don mais on ne peut pas vérifier)
+                if (document.querySelector('input[name="shipping_methods"]')) {
+                    hideShippingSection();
+                }
+            });
+    }
+    
+    // Exécuter immédiatement
+    checkAndHide();
+    
+    // Exécuter plusieurs fois avec des délais
+    setTimeout(checkAndHide, 300);
+    setTimeout(checkAndHide, 600);
+    setTimeout(checkAndHide, 1000);
+    setTimeout(checkAndHide, 2000);
+    setTimeout(checkAndHide, 3000);
+    
+    // Observer les changements
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkAndHide);
+    }
+    
+    var observer = new MutationObserver(function(mutations) {
+        // Vérifier si de nouveaux éléments de shipping apparaissent
+        if (document.querySelector('input[name="shipping_methods"]')) {
+            checkAndHide();
+        }
+    });
+    
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: false
+    });
+})();
+</script>
+
+========================================
+FIN DU CODE À COPIER
+

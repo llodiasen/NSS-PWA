@@ -1,0 +1,152 @@
+SOLUTION JAVASCRIPT ULTIME - Version qui ignore les erreurs
+========================================
+
+Cette version fonctionne même s'il y a des erreurs 401 dans la console.
+Elle ne dépend pas de l'API cart.js et masque directement par sélecteurs CSS.
+
+========================================
+
+Copiez ce code dans theme.liquid (juste avant </head>) :
+
+========================================
+
+<script>
+// Solution ultime - Fonctionne même avec des erreurs API
+(function() {
+    'use strict';
+    
+    function forceHideShipping() {
+        // Vérifier qu'on est sur checkout
+        if (!document.location.href.includes('/checkout')) return;
+        
+        // Méthode 1 : Masquer directement par les sélecteurs visibles
+        var selectors = [
+            'input[name="shipping_methods"]',
+            '.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys',
+            'h3[id="shippingMethod"]',
+            '[id*="shipping_methods"]',
+            'fieldset#shipping_methods'
+        ];
+        
+        selectors.forEach(function(selector) {
+            try {
+                var elements = document.querySelectorAll(selector);
+                elements.forEach(function(el) {
+                    // Masquer l'élément
+                    el.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; margin: 0 !important; padding: 0 !important; opacity: 0 !important;';
+                    
+                    // Masquer tous les parents jusqu'à la section
+                    var parent = el;
+                    for (var i = 0; i < 10; i++) {
+                        parent = parent.parentElement;
+                        if (!parent || parent === document.body) break;
+                        
+                        if (parent.tagName === 'SECTION' || 
+                            parent.tagName === 'FIELDSET' ||
+                            parent.id && parent.id.includes('shipping')) {
+                            parent.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+                            break;
+                        }
+                        
+                        // Masquer aussi si contient du texte de shipping
+                        var text = parent.textContent || '';
+                        if (text.includes('Livraison') || 
+                            (text.includes('Mode d') && text.includes('expédition'))) {
+                            parent.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+                            break;
+                        }
+                    }
+                });
+            } catch(e) {
+                // Ignorer les erreurs
+            }
+        });
+        
+        // Méthode 2 : Chercher par texte et masquer la section parente
+        var allSections = document.querySelectorAll('section, fieldset');
+        allSections.forEach(function(section) {
+            var text = section.textContent || '';
+            if ((text.includes('Livraison locale') ||
+                 text.includes('Livraison en point relais') ||
+                 text.includes('Livraison à domicile') ||
+                 (text.includes('Mode d') && text.includes('expédition'))) &&
+                section.querySelector('input[name="shipping_methods"]')) {
+                section.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+            }
+        });
+        
+        // Méthode 3 : Injecter du CSS dynamiquement
+        if (!document.getElementById('hide-shipping-css')) {
+            var style = document.createElement('style');
+            style.id = 'hide-shipping-css';
+            style.textContent = `
+                input[name="shipping_methods"],
+                .yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys,
+                h3[id="shippingMethod"],
+                [id*="shipping_methods"],
+                section:has(input[name="shipping_methods"]),
+                fieldset:has(input[name="shipping_methods"]) {
+                    display: none !important;
+                    visibility: hidden !important;
+                    height: 0 !important;
+                    overflow: hidden !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    // Exécuter immédiatement
+    forceHideShipping();
+    
+    // Exécuter plusieurs fois avec des délais croissants
+    var delays = [100, 300, 500, 800, 1200, 2000, 3000, 5000];
+    delays.forEach(function(delay) {
+        setTimeout(forceHideShipping, delay);
+    });
+    
+    // Observer tous les changements DOM
+    if (typeof MutationObserver !== 'undefined') {
+        var observer = new MutationObserver(function() {
+            forceHideShipping();
+        });
+        
+        // Observer dès que body existe
+        if (document.body) {
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        } else {
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.body) {
+                    observer.observe(document.body, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+            });
+        }
+    }
+    
+    // Exécuter sur tous les événements possibles
+    var events = ['load', 'DOMContentLoaded', 'readystatechange'];
+    events.forEach(function(eventName) {
+        document.addEventListener(eventName, forceHideShipping);
+        window.addEventListener(eventName, forceHideShipping);
+    });
+})();
+</script>
+
+========================================
+
+Cette version :
+- Ne dépend PAS de l'API cart.js (ignore les erreurs 401)
+- S'exécute plusieurs fois avec des délais
+- Observe tous les changements DOM
+- Injecte du CSS dynamiquement
+- Masque par plusieurs méthodes différentes
+- Fonctionne même si Shopify charge le contenu très tard
+
+========================================
+

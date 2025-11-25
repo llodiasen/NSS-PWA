@@ -1,0 +1,87 @@
+TEST DIRECT DANS LA CONSOLE DU NAVIGATEUR
+========================================
+
+Pour tester rapidement si le masquage fonctionne, copiez cette commande dans la console (F12 > Console) :
+
+========================================
+
+// Test direct dans la console - Copiez-collez ce code
+(function() {
+    console.log('=== TEST MASQUAGE EXPEDITION ===');
+    
+    // Masquer les inputs
+    var shippingInputs = document.querySelectorAll('input[name="shipping_methods"]');
+    console.log('Inputs trouvés:', shippingInputs.length);
+    
+    shippingInputs.forEach(function(input, i) {
+        console.log('Input ' + i + ':', input.id || input.name);
+        input.style.display = 'none';
+        input.style.visibility = 'hidden';
+        
+        // Masquer le parent
+        var parent = input.closest('section, fieldset, div');
+        if (parent) {
+            parent.style.display = 'none';
+            parent.style.visibility = 'hidden';
+            console.log('Parent masqué:', parent.tagName, parent.id || parent.className);
+        }
+    });
+    
+    // Masquer le conteneur
+    var container = document.querySelector('.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys');
+    if (container) {
+        console.log('Conteneur trouvé:', container);
+        container.style.display = 'none';
+        container.style.visibility = 'hidden';
+        
+        var section = container.closest('section, fieldset');
+        if (section) {
+            section.style.display = 'none';
+            section.style.visibility = 'hidden';
+            console.log('Section parente masquée:', section.tagName);
+        }
+    }
+    
+    // Masquer le titre
+    var heading = document.getElementById('shippingMethod');
+    if (heading) {
+        console.log('Titre trouvé:', heading);
+        heading.style.display = 'none';
+        var section = heading.closest('section, fieldset');
+        if (section) {
+            section.style.display = 'none';
+        }
+    }
+    
+    // Masquer toutes les sections avec "Livraison" dans le texte
+    var allElements = document.querySelectorAll('section, fieldset');
+    allElements.forEach(function(el) {
+        var text = el.textContent || '';
+        if (text.includes('Livraison locale') || 
+            text.includes('Livraison en point relais') ||
+            text.includes('Livraison à domicile') ||
+            text.includes('Mode d') && text.includes('expédition')) {
+            el.style.display = 'none';
+            el.style.visibility = 'hidden';
+            console.log('Section masquée par texte:', el.tagName);
+        }
+    });
+    
+    console.log('=== FIN TEST ===');
+})();
+
+========================================
+
+INSTRUCTIONS :
+
+1. Allez sur la page checkout (avec un don dans le panier)
+2. Ouvrez la console (F12 > Console)
+3. Copiez-collez TOUT le code ci-dessus
+4. Appuyez sur Entrée
+5. Regardez si la section d'expédition disparaît
+6. Regardez les messages dans la console pour voir ce qui a été trouvé
+
+Si ça fonctionne dans la console, le problème vient de l'endroit où le script est ajouté ou du timing d'exécution.
+
+========================================
+

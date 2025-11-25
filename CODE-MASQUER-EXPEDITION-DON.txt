@@ -1,0 +1,69 @@
+COPIER CE CODE EXACTEMENT CI-DESSOUS :
+========================================
+
+<script>
+// Masquer les modes d'expédition pour les dons
+(function() {
+    function hideShipping() {
+        if (!window.location.href.includes('/checkout')) return;
+        
+        fetch('/cart.js')
+            .then(function(r) { return r.json(); })
+            .then(function(cart) {
+                var isDon = cart.items && cart.items.some(function(item) {
+                    return item.variant_id === 52543227003226 ||
+                           (item.properties && Object.keys(item.properties).some(function(k) {
+                               return k === 'Montant du don' || item.properties[k].toString().includes('€');
+                           }));
+                });
+                
+                if (isDon && cart.items.length === 1) {
+                    // Masquer les inputs de shipping
+                    var shippingInputs = document.querySelectorAll('input[name="shipping_methods"]');
+                    shippingInputs.forEach(function(input) {
+                        var parent = input.closest('section, fieldset');
+                        if (parent) {
+                            var section = parent.closest('section') || parent;
+                            section.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;';
+                        }
+                    });
+                    
+                    // Masquer les headings
+                    var headings = document.querySelectorAll('h2, h3');
+                    headings.forEach(function(h) {
+                        if (h.textContent.toLowerCase().includes('expédition') || 
+                            h.textContent.toLowerCase().includes('livraison')) {
+                            var section = h.closest('section, fieldset');
+                            if (section) section.style.cssText = 'display: none !important; visibility: hidden !important;';
+                        }
+                    });
+                    
+                    // Masquer le conteneur yyi4nyn
+                    var container = document.querySelector('.yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys');
+                    if (container) {
+                        var section = container.closest('section, fieldset');
+                        if (section) section.style.cssText = 'display: none !important; visibility: hidden !important; height: 0 !important;';
+                    }
+                }
+            })
+            .catch(function(e) { console.error('Erreur:', e); });
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', hideShipping);
+    } else {
+        hideShipping();
+    }
+    
+    setTimeout(hideShipping, 500);
+    setTimeout(hideShipping, 1000);
+    setTimeout(hideShipping, 2000);
+    
+    var observer = new MutationObserver(hideShipping);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
+========================================
+FIN DU CODE À COPIER
+

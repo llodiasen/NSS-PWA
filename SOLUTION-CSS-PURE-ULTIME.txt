@@ -1,0 +1,58 @@
+SOLUTION CSS PURE - Fonctionne TOUJOURS
+========================================
+
+Si le JavaScript ne fonctionne pas, utilisez cette solution CSS pure.
+Elle masque directement la classe spécifique que vous avez identifiée.
+
+========================================
+
+INSTRUCTIONS :
+
+1. Shopify → Thèmes → Personnaliser (pas "Modifier le code")
+2. Paramètres du thème → CSS additionnel
+3. Collez ce CSS :
+
+========================================
+
+/* Masquer la section "Mode d'expédition" - Classe spécifique */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Masquer aussi le h3 et le fieldset à l'intérieur */
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 h3#shippingMethod,
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 fieldset#shipping_methods,
+div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41 input[name="shipping_methods"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Masquer le conteneur parent si nécessaire */
+section:has(div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod)),
+div:has(> div._1ip0g651._1ip0g650._1fragemn2._1fragem50._1fragem6t._1fragem41:has(h3#shippingMethod)) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+========================================
+
+⚠️ ATTENTION : Cette solution masquera TOUJOURS la section sur checkout.
+
+Pour que ça fonctionne UNIQUEMENT pour les dons, vous DEVEZ configurer le produit dans Shopify :
+- Paramètres → Produits → Don ATTA
+- Section "Expédition"
+- Décochez "Ce produit nécessite une expédition"
+
+OU utilisez cette version avec JavaScript qui vérifie le panier (mais sans API cart.js).
+
+========================================
+

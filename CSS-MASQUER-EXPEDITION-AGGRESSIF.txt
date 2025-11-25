@@ -1,0 +1,42 @@
+COPIER CE CODE CSS CI-DESSOUS (VERSION AGRESSIVE) :
+========================================
+
+/* Masquer les modes d'expédition pour les dons - Version agressive */
+body.donation-checkout-no-shipping fieldset#shipping_methods,
+body.donation-checkout-no-shipping input[name="shipping_methods"],
+body.donation-checkout-no-shipping .yyi4nyn.yyi4nyk.yyi4nyr.yyi4nys,
+body.donation-checkout-no-shipping h3[id="shippingMethod"],
+body.donation-checkout-no-shipping section[aria-labelledby*="shipping"],
+body.donation-checkout-no-shipping section[aria-label*="expédition"],
+body.donation-checkout-no-shipping [id*="shipping_methods"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Masquer aussi les parents */
+body.donation-checkout-no-shipping fieldset#shipping_methods ~ *,
+body.donation-checkout-no-shipping input[name="shipping_methods"] ~ * {
+    display: none !important;
+}
+
+/* Masquer le conteneur parent */
+body.donation-checkout-no-shipping .yyi4nyn {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Masquer les sections contenant "Livraison" ou "expédition" */
+body.donation-checkout-no-shipping section:has(h3[id="shippingMethod"]),
+body.donation-checkout-no-shipping section:has(input[name="shipping_methods"]) {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+========================================
+FIN DU CODE CSS
+

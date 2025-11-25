@@ -68,8 +68,11 @@ body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: 
 <link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://backtheme.com/neoton/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css?ver=5.15.3' type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-brands-css' href='https://backtheme.com/neoton/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min52d5.css?ver=5.15.3' type='text/css' media='all' />
 <link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://backtheme.com/neoton/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css?ver=5.15.3' type='text/css' media='all' />
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery.minf43b.js?ver=3.7.1" id="jquery-core-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+<!-- jQuery depuis CDN (fallback) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery.minf43b.js?ver=3.7.1" id="jquery-core-js" onerror="console.log('jQuery depuis backtheme.com non disponible, utilisation du CDN')"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/jquery-migrate.min5589.js?ver=3.4.1" id="jquery-migrate-js" onerror="console.log('jQuery migrate depuis backtheme.com non disponible')"></script>
 <script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min4ebd.js?ver=2.7.0-wc.9.0.2" id="jquery-blockui-js" defer="defer" data-wp-strategy="defer"></script>
 <script type="text/javascript" id="wc-add-to-cart-js-extra">
 /* <![CDATA[ */
@@ -95,6 +98,7 @@ var woocommerce_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_aj
   	<!-- PWA Manifest -->
 	<link rel="manifest" href="manifest.json">
 	<meta name="theme-color" content="#0088CB">
+	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta name="apple-mobile-web-app-title" content="WasaAfrica">
@@ -4213,43 +4217,43 @@ for (let j = 0; j < urlFields.length; j++) {
 			document.body.className = c;
 		})();
 	</script>
-	<link rel='stylesheet' id='wc-blocks-style-css' href='https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocksa294.html?ver=wc-9.0.2' type='text/css' media='all' />
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/contact-form-7/includes/swv/js/indexa950.html?ver=5.9.6" id="swv-js"></script>
+	<link rel='stylesheet' id='wc-blocks-style-css' href='https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocksa294.js?ver=wc-9.0.2' type='text/css' media='all' />
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/contact-form-7/includes/swv/js/indexa950.js?ver=5.9.6" id="swv-js"></script>
 <script type="text/javascript" id="contact-form-7-js-extra">
 /* <![CDATA[ */
 var wpcf7 = {"api":{"root":"https:\/\/backtheme.com\/neoton\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/contact-form-7/includes/js/indexa950.html?ver=5.9.6" id="contact-form-7-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min9e2b.html?ver=9.0.2" id="sourcebuster-js-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/contact-form-7/includes/js/indexa950.js?ver=5.9.6" id="contact-form-7-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min9e2b.js?ver=9.0.2" id="sourcebuster-js-js"></script>
 <script type="text/javascript" id="wc-order-attribution-js-extra">
 /* <![CDATA[ */
 var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"base64":false,"ajaxurl":"https:\/\/backtheme.com\/neoton\/wp-admin\/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","utm_source_platform":"current.plt","utm_creative_format":"current.fmt","utm_marketing_tactic":"current.tct","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min9e2b.html?ver=9.0.2" id="wc-order-attribution-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/imagesloaded.minbb93.html?ver=5.0.0" id="imagesloaded-js"></script>
-<script type="text/javascript" src="assets/js/plugins4a7d.html?ver=20151215" id="neoton-plugin-js"></script>
-<script type="text/javascript" src="assets/js/classie5139.html?ver=201513434" id="neoton-classie-js"></script>
-<script type="text/javascript" src="assets/js/mobilemenu5139.html?ver=201513434" id="neoton-mobilemenu-js"></script>
-<script type="text/javascript" src="assets/js/main5139.html?ver=201513434" id="neoton-main-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min9e2b.js?ver=9.0.2" id="wc-order-attribution-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/imagesloaded.minbb93.js?ver=5.0.0" id="imagesloaded-js"></script>
+<script type="text/javascript" src="assets/js/plugins4a7d.js?ver=20151215" id="neoton-plugin-js"></script>
+<script type="text/javascript" src="assets/js/classie5139.js?ver=201513434" id="neoton-classie-js"></script>
+<script type="text/javascript" src="assets/js/mobilemenu5139.js?ver=201513434" id="neoton-mobilemenu-js"></script>
+<script type="text/javascript" src="assets/js/main5139.js?ver=201513434" id="neoton-main-js"></script>
 <script type="text/javascript" id="wc-cart-fragments-js-extra">
 /* <![CDATA[ */
 var wc_cart_fragments_params = {"ajax_url":"\/neoton\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/neoton\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_5a424add3381754b9b8a7b81121183c9","fragment_name":"wc_fragments_5a424add3381754b9b8a7b81121183c9","request_timeout":"5000"};
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min9e2b.html?ver=9.0.2" id="wc-cart-fragments-js" defer="defer" data-wp-strategy="defer"></script>
-<script type="text/javascript" defer src="https://backtheme.com/neoton/wp-content/plugins/mailchimp-for-wp/assets/js/formsc8f9.html?ver=4.9.13" id="mc4wp-forms-api-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/webpack.runtime.mindcff.html?ver=3.22.3" id="elementor-webpack-runtime-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/frontend-modules.mindcff.html?ver=3.22.3" id="elementor-frontend-modules-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min05da.html?ver=4.0.2" id="elementor-waypoints-js"></script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/ui/core.min3f14.html?ver=1.13.2" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min9e2b.js?ver=9.0.2" id="wc-cart-fragments-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" defer src="https://backtheme.com/neoton/wp-content/plugins/mailchimp-for-wp/assets/js/formsc8f9.js?ver=4.9.13" id="mc4wp-forms-api-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/webpack.runtime.mindcff.js?ver=3.22.3" id="elementor-webpack-runtime-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/frontend-modules.mindcff.js?ver=3.22.3" id="elementor-frontend-modules-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/lib/waypoints/waypoints.min05da.js?ver=4.0.2" id="elementor-waypoints-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-includes/js/jquery/ui/core.min3f14.js?ver=1.13.2" id="jquery-ui-core-js"></script>
 <script type="text/javascript" id="elementor-frontend-js-before">
 /* <![CDATA[ */
 var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselWrapperAriaLabel":"Carousel | Horizontal scrolling: Arrow Left & Right","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":true},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":true},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":true},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":true}}},"version":"3.22.3","is_static":false,"experimentalFeatures":{"e_optimized_assets_loading":true,"e_optimized_css_loading":true,"additional_custom_breakpoints":true,"container_grid":true,"e_swiper_latest":true,"e_onboarding":true,"home_screen":true,"ai-layout":true,"landing-pages":true},"urls":{"assets":"https:\/\/backtheme.com\/neoton\/wp-content\/plugins\/elementor\/assets\/"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_mobile_extra","viewport_tablet","viewport_tablet_extra","viewport_laptop","viewport_widescreen"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":7,"title":"WasaAfrica%20%E2%80%93%20Actualit%C3%A9s%20et%20Informations%20sur%20l%27Afrique","excerpt":"","featuredImage":false}};
 /* ]]> */
 </script>
-<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/frontend.mindcff.html?ver=3.22.3" id="elementor-frontend-js"></script>
+<script type="text/javascript" src="https://backtheme.com/neoton/wp-content/plugins/elementor/assets/js/frontend.mindcff.js?ver=3.22.3" id="elementor-frontend-js"></script>
   
   <!-- Service Worker Registration -->
   <script>
